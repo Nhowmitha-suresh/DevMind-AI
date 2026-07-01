@@ -1,0 +1,20 @@
+# Python virtual environment
+backend/venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# Chroma database
+backend/chroma/
+
+# React
+frontend/node_modules/
+frontend/dist/
+
+# VS Code
+.vscode/
