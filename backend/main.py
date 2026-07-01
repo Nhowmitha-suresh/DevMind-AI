@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+
 from api.chat import router as chat_router
 
 app = FastAPI(
@@ -8,9 +9,11 @@ app = FastAPI(
 
 app.include_router(chat_router)
 
+
 @app.get("/")
-def home():
+def health():
+
     return {
         "status": "Running",
-        "app": "DevMind AI"
+        "model": "Qwen2.5-Coder 7B"
     }

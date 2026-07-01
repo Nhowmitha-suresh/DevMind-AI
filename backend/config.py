@@ -1,0 +1,5 @@
+MODEL_NAME = "qwen2.5-coder:7b"
+
+MAX_CONTEXT = 4096
+
+TEMPERATURE = 0.3

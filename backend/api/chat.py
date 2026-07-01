@@ -1,10 +1,19 @@
 from fastapi import APIRouter
-from models.chat import ChatRequest
-from services.ollama_service import generate_response
 
-router = APIRouter()
+from models.chat import ChatRequest
+from services.llm_service import LLMService
+
+router = APIRouter(
+    prefix="/api",
+    tags=["Chat"]
+)
+
 
 @router.post("/chat")
 def chat(request: ChatRequest):
-    reply = generate_response(request.message)
-    return {"response": reply}
+
+    reply = LLMService.generate(request.message)
+
+    return {
+        "response": reply
+    }
