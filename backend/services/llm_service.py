@@ -1,21 +1,19 @@
-import ollama
-
-from config import MODEL_NAME
+from backend.services.claude_service import ClaudeService
 
 
 class LLMService:
+    """
+    Main LLM router.
+    Currently uses Claude.
+    Later this can route to Gemini, Ollama, etc.
+    """
 
-    @staticmethod
-    def generate(prompt: str):
+    def __init__(self):
+        self.claude = ClaudeService()
 
-        response = ollama.chat(
-            model=MODEL_NAME,
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ]
-        )
+    def generate_response(self, prompt: str) -> str:
+        return self.claude.chat(prompt)
 
-        return response["message"]["content"]
+
+# Singleton instance
+llm_service = LLMService()

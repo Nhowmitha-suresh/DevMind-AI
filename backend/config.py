@@ -1,5 +1,7 @@
-MODEL_NAME = "qwen2.5-coder:7b"
+import os
+from dotenv import load_dotenv
 
-MAX_CONTEXT = 4096
+load_dotenv()
 
-TEMPERATURE = 0.3
+ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+MODEL_NAME = os.getenv("MODEL_NAME")
