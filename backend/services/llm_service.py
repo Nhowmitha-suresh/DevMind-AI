@@ -1,19 +1,9 @@
-from backend.services.claude_service import ClaudeService
+from pydantic import BaseModel
 
 
-class LLMService:
-    """
-    Main LLM router.
-    Currently uses Claude.
-    Later this can route to Gemini, Ollama, etc.
-    """
-
-    def __init__(self):
-        self.claude = ClaudeService()
-
-    def generate_response(self, prompt: str) -> str:
-        return self.claude.chat(prompt)
+class ChatRequest(BaseModel):
+    message: str
 
 
-# Singleton instance
-llm_service = LLMService()
+class ChatResponse(BaseModel):
+    response: str
