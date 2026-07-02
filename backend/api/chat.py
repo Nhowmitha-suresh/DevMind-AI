@@ -1,19 +1,29 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
-from models.chat import ChatRequest
-from services.llm_service import LLMService
+from backend.models.chat import ChatRequest, ChatResponse
+from backend.services.llm_service import llm_service
 
 router = APIRouter(
-    prefix="/api",
+    prefix="/chat",
     tags=["Chat"]
 )
 
 
-@router.post("/chat")
-def chat(request: ChatRequest):
+@router.post("/", response_model=ChatResponse)
+async def chat(request: ChatRequest):
+    """
+    Chat endpoint for DevMind AI.
+    """
 
-    reply = LLMService.generate(request.message)
+    try:
+        response = llm_service.generate_response(request.message)
 
-    return {
-        "response": reply
-    }
+        return ChatResponse(
+            response=response
+        )
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
