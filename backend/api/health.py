@@ -7,7 +7,7 @@ router = APIRouter(
 
 
 @router.get("/")
-async def health_check():
+async def health():
     return {
         "status": "healthy",
         "application": "DevMind AI",

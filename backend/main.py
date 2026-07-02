@@ -5,21 +5,21 @@ from backend.api.chat import router as chat_router
 from backend.api.health import router as health_router
 
 app = FastAPI(
-    title="DevMind AI API",
-    description="AI-powered developer assistant",
+    title="DevMind AI",
+    description="AI Developer Assistant",
     version="1.0.0"
 )
 
-# CORS Configuration
+# Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Change this in production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Register Routers
+# Register API routes
 app.include_router(chat_router)
 app.include_router(health_router)
 
@@ -28,5 +28,5 @@ app.include_router(health_router)
 async def root():
     return {
         "message": "Welcome to DevMind AI 🚀",
-        "docs": "/docs"
+        "status": "Running"
     }
